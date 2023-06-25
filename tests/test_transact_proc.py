@@ -172,3 +172,24 @@ def test_is_sorted(test_sort):
         }
     ]
     assert sort_data(test_sort) == data, "Incorrect sort"
+
+
+def test_is_hide_card(test_hide_card):
+    """Проверка сокрытия номера карты"""
+    assert hide_card_number(test_hide_card) == "Visa Gold 7756 67** **** 2839", f"Does not hide"
+
+
+def test_is_hide_account(test_hide_account):
+    """Проверка сокрытия номера счёта"""
+    assert hide_account_number(test_hide_account) == "Счет **9453", "Does not hide"
+
+
+def test_output(test_get_last):
+    """Проверка результата"""
+    pt1 = "29.09.2019 Перевод со счета на счет\nСчет **9637 -> Счет **4961\n45849.53 USD\n"
+    pt2 = "23.11.2018 Перевод с карты на карту\nVisa Platinum 5355 13** **** 8236 -> Maestro 8045 76** **** 9061\n79428.73 USD\n"
+    pt3 = "31.07.2018 Перевод организации\nMasterCard 8532 49** **** 2395 -> Счет **9420\n34380.08 USD"
+    pt4 = "01.06.2019 Перевод с карты на счет\nМИР 8201 42** **** 6664 -> Счет **9956\n60888.63 руб.\n"
+    pt5 = "28.12.2018 Открытие вклада\nСчет **2391\n49192.52 USD\n"
+    data = f"{pt1}\n{pt4}\n{pt5}\n{pt2}\n{pt3}"
+    assert get_last_transactions(sort_data(test_get_last)) == data, "Incorrect output"
